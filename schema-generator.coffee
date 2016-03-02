@@ -25,7 +25,7 @@ class SchemaGenerator
     map = []
 
     names.forEach (name) ->
-      map.push =
+      map.push 
         'value': name
         'name': name
         'group': component[name].action
@@ -50,7 +50,7 @@ class SchemaGenerator
 
     servo_sweep = 'model.servo_action == \'sweep\' && ' + servo_condition
     servo_to = 'model.servo_action == \'to\' && ' + servo_condition
-
+    console.log map
     conditions = {
       map: map
       servo_condition: servo_condition
