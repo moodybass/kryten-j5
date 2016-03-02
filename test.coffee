@@ -1,6 +1,12 @@
 Kryten = require './index.coffee'
 kryten = new Kryten({})
 
+# BLESerialPort = require('ble-serial').SerialPort;
+# Firmata = require('firmata').Board;
+# kryten = new Kryten({
+#   io: new Firmata(new BLESerialPort({}))
+# })
+
 testOptions =
 'port': 'auto-detect'
 'interval': '500'
@@ -22,13 +28,23 @@ testOptions =
   }
 ]
 
-kryten.onConfig(testOptions)
+kryten.configure(testOptions)
 
-setTimeout ->
-  console.log 'blink'
-  kryten.onMessage({payload: {component: 'Led_Pin_13', state: '1'}})
-,10000
+kryten.on 'ready', ->
+  console.log 'ready to go dog'
 
-setTimeout ->
-  kryten.onMessage({payload:{component: 'Led_Pin_13', state: '0'}})
-,1000
+  kryten.on 'data', (data)->
+    console.log data
+
+  kryten.on 'schema', (schema)->
+    console.log schema
+
+  state = '1'
+
+  setInterval ->
+    kryten.onMessage({payload: {component: 'Led_Pin_13', state: state}})
+    if state == '1'
+      state = '0'
+    else
+      state = '1'
+  ,1000

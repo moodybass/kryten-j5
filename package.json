@@ -1,6 +1,6 @@
 {
-  "name": "kryten-j5",
-  "version": "1.0.2",
+  "name": "kryten",
+  "version": "1.0.3",
   "description": "",
   "main": "index.js",
   "scripts": {

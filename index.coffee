@@ -3,12 +3,16 @@ five         = require 'johnny-five'
 Oled         = require 'oled-js'
 font         = require 'oled-font-5x7'
 debug        = require('debug')('kryten')
+util         = require 'util'
+EventEmitter = require('events').EventEmitter
 SchemaGenerator = require './schema-generator.coffee'
 SchemaGenerator = new SchemaGenerator
 
 class Kryten
 
   constructor: (io={}) ->
+
+    EventEmitter.call @
 
     @testOptions =
     'port': 'auto-detect'
@@ -30,6 +34,8 @@ class Kryten
         'pin': '6'
       }
     ]
+
+    @schema = {}
 
     @options = {}
 
@@ -53,6 +59,7 @@ class Kryten
 
     debug @bot
 
+  util.inherits(@, EventEmitter)
 
   StartBoard: (device) =>
     self = @
@@ -66,6 +73,7 @@ class Kryten
 
       @board.on 'ready', ->
         debug 'ready dude'
+        self.emit 'ready'
         self.boardReady = true
         self.configBoard(device)
         self.Read()
@@ -268,12 +276,13 @@ class Kryten
         else null
 
       schema = SchemaGenerator.generateMessageSchema(self.bot.names, self.bot.component)
+      self.emit 'schema', schema
       debug schema
 
 
-  onConfig: (device) =>
+  configure: (device = @testOptions) =>
     self = @
-    @options = device
+    self.options = device
     self.StartBoard(device) if !self.started
     self.checkConfig(device)
 
@@ -286,10 +295,7 @@ class Kryten
       debug self.bot.read
       if !(_.isEmpty(self.bot.read))
         debug self.bot.read
-      #  self.emit('message',{
-      #    "devices": "*",
-      #    "payload": read
-      #  })
+        self.emit 'data', self.bot.read
     , interval
 
 module.exports = Kryten
