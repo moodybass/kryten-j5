@@ -68,4 +68,4 @@ class SchemaGenerator
     }
 
 
-exports.SchemaGenerator = SchemaGenerator
+module.exports = SchemaGenerator

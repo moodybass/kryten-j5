@@ -2,9 +2,9 @@ _            = require 'lodash'
 five         = require 'johnny-five'
 Oled         = require 'oled-js'
 font         = require 'oled-font-5x7'
-debug        = require ('debug')
+debug        = require('debug')('kryten')
 SchemaGenerator = require './schema-generator.coffee'
-SchemaGenerator = new SchemaGenerator.SchemaGenerator
+SchemaGenerator = new SchemaGenerator
 
 class Kryten
 
@@ -51,7 +51,7 @@ class Kryten
     @boardReady = false
     @started = false
 
-    console.log @bot
+    debug @bot
 
 
   StartBoard: (device) =>
@@ -65,7 +65,7 @@ class Kryten
         @board = new five.Board()
 
       @board.on 'ready', ->
-        console.log 'ready dude'
+        debug 'ready dude'
         self.boardReady = true
         self.configBoard(device)
         self.Read()
@@ -145,7 +145,7 @@ class Kryten
   configBoard: (data) =>
     self = @
     @device = data
-    console.log 'board is', @boardReady
+    debug 'board is', @boardReady
     if @boardReady
       @bot = {
         names: []
@@ -159,7 +159,7 @@ class Kryten
       }
 
       components = @device.components
-      console.log components
+      debug components
       debug(components)
       self.createComponents(components)
 
@@ -167,14 +167,14 @@ class Kryten
       setTimeout ->
         #self.emit('config')
         self.configBoard(@device)
-        console.log 'config'
+        debug 'config'
       ,1000
 
   createComponents: (comp) =>
     self = @
     _.forEach comp, (part) ->
       debug(part)
-      console.log self.bot
+      debug self.bot
 
       return if !_.has(part, "pin") && !_.has(part, "address")
 
@@ -268,7 +268,7 @@ class Kryten
         else null
 
       schema = SchemaGenerator.generateMessageSchema(self.bot.names, self.bot.component)
-      console.log schema
+      debug schema
 
 
   onConfig: (device) =>
@@ -283,13 +283,13 @@ class Kryten
     debug("interval is:", interval)
 
     setInterval ->
-      console.log self.bot.read
+      debug self.bot.read
       if !(_.isEmpty(self.bot.read))
-        console.log self.bot.read
+        debug self.bot.read
       #  self.emit('message',{
       #    "devices": "*",
       #    "payload": read
       #  })
     , interval
 
-exports.Kryten = Kryten
+module.exports = Kryten

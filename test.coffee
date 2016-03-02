@@ -1,6 +1,5 @@
 Kryten = require './index.coffee'
-
-kryten = new Kryten.Kryten({})
+kryten = new Kryten({})
 
 testOptions =
 'port': 'auto-detect'
@@ -23,30 +22,6 @@ testOptions =
   }
 ]
 
-testOptions2 =
-'port': 'auto-detect'
-'interval': '500'
-'components': [
-  {
-    'name': 'Led_Pin_13'
-    'action': 'digitalWrite'
-    'pin': '13'
-  }
-  {
-    'name': 'digital'
-    'action': 'digitalRead'
-    'pin': '4'
-  }
-  {
-    'name': 'Servo1'
-    'action': 'servo'
-    'pin': '6'
-  }
-]
-
-#console.log kryten
-
-
 kryten.onConfig(testOptions)
 
 setTimeout ->
@@ -57,13 +32,3 @@ setTimeout ->
 setTimeout ->
   kryten.onMessage({payload:{component: 'Led_Pin_13', state: '0'}})
 ,1000
-
-setTimeout ->
-  kryten.onMessage({payload:{component: 'Led_Pin_13', state: '1'}})
-,1000
-
-
-setTimeout ->
-  kryten.onMessage({payload:{component: 'Led_Pin_13', state: '0'}})
-  kryten.onConfig(testOptions2)
-,20000
