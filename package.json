@@ -1,0 +1,19 @@
+{
+  "name": "kryten-j5",
+  "version": "1.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "virgilvox <moheeb.zara@citrix.com> (http://app.octoblu.com/)",
+  "license": "ISC",
+  "dependencies": {
+    "coffee-script": "^1.10.0",
+    "debug": "^2.2.0",
+    "johnny-five": "^0.9.27",
+    "lodash": "^4.6.1",
+    "oled-font-5x7": "^1.0.0",
+    "oled-js": "^4.0.1"
+  }
+}
