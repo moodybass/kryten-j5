@@ -293,6 +293,9 @@ class Kryten
       self.emit 'schema', schema
       debug schema
 
+  spareHead: (device = @testOptions) =>
+    self = @
+    self.configure(device)
 
   configure: (device = @testOptions) =>
     self = @
