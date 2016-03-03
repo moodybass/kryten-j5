@@ -3,7 +3,7 @@ schemaModel = require './schema-model.coffee'
 class SchemaGenerator
 
   createCondition: (items) =>
-    if items != undefined
+    if items[0]?
       i = 0
       while i < items.length
         if i == 0
@@ -13,7 +13,8 @@ class SchemaGenerator
         i++
       return condition
     else
-      return 'model.component == \'aNeverEndingSchema\''
+      condition = 'model.component == \'aNeverEndingSchema\''
+      return condition
 
   generateMessageSchema: (names, component) =>
 
@@ -25,7 +26,7 @@ class SchemaGenerator
     map = []
 
     names.forEach (name) ->
-      map.push 
+      map.push
         'value': name
         'name': name
         'group': component[name].action
@@ -48,9 +49,10 @@ class SchemaGenerator
     text_condition = @createCondition(text_)
     servoc_condition = @createCondition(continuous_)
 
+
     servo_sweep = 'model.servo_action == \'sweep\' && ' + servo_condition
     servo_to = 'model.servo_action == \'to\' && ' + servo_condition
-    console.log map
+
     conditions = {
       map: map
       servo_condition: servo_condition
