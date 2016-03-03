@@ -1,5 +1,7 @@
 # kryten
 
+![Kryten](http://s30.postimg.org/7o69ldgs1/tumblr_m61bkqd_ZF61rvt47eo1_500.jpg)
+
 A wrapper for johnny-five that lets you define/re-configure a board using JSON and then generates schemaform.io schema for controlling it.
 
 You can change what io it uses easily - see uncommented lines in example below.
