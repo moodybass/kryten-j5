@@ -1,11 +1,11 @@
 Kryten = require './index.coffee'
 kryten = new Kryten({})
 
-# BLESerialPort = require('ble-serial').SerialPort;
-# Firmata = require('firmata').Board;
-# kryten = new Kryten({
-#   io: new Firmata(new BLESerialPort({}))
-# })
+#BLESerialPort = require('ble-serial').SerialPort;
+#Firmata = require('firmata').Board;
+#kryten = new Kryten({
+# io: new Firmata(new BLESerialPort({}))
+#})
 
 testOptions =
 'port': 'auto-detect'

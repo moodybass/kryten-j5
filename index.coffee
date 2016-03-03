@@ -67,10 +67,13 @@ class Kryten
     @started = true
 
     if !@boardReady
-      if device.port != "auto-detect"
-        @board = new five.Board(@io)
+      if device.port != 'auto-detect'
+        if !@io.io?
+          @board = new five.Board({port: device.port})
+        else
+          @board = new five.Board(@io)
       else
-        @board = new five.Board()
+        @board = new five.Board(@io)
 
       @board.on 'ready', ->
         debug 'ready dude'
@@ -303,7 +306,7 @@ class Kryten
     debug("interval is:", interval)
 
     setInterval ->
-      debug self.bot.read
+
       if !(_.isEmpty(self.bot.read))
         debug self.bot.read
         self.emit 'data', self.bot.read
