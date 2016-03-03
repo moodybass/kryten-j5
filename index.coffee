@@ -283,6 +283,7 @@ class Kryten
             neutral: 50,
             pin: part.pin
           })
+          self.bot.names.push(part.name)
         else null
 
       schema = SchemaGenerator.generateMessageSchema(self.bot.names, self.bot.component)
