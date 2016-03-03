@@ -50,6 +50,7 @@ class Kryten
       lcd: []
       accel: []
       map: []
+      esc: []
     }
 
     prevData = {}
@@ -135,6 +136,8 @@ class Kryten
         else if payload.text.length > 16
           self.bot.lcd[payload.name].cursor(0,0).print(payload.text.substring(0,16))
           self.bot.lcd[payload.name].cursor(1,0).print(payload.text.substring(16,33))
+      when "esc"
+        self.bot.esc[payload.name].speed(part.speed)
 
   checkConfig: (data) =>
     if @boardReady
@@ -164,6 +167,7 @@ class Kryten
         lcd: []
         accel: []
         map: []
+        esc: []
       }
 
       components = @device.components
@@ -273,6 +277,12 @@ class Kryten
             values["gyro"] = {"x": this.gyro.x , "y": this.gyro.y, "z": this.gyro.z}
             values["temp"] = {"temperature" : this.temperature.celsius}
             self.bot.read[part.name] = values
+        when 'esc'
+          self.bot.esc[part.name] = new five.ESC({
+            device: "FORWARD_REVERSE",
+            neutral: 50,
+            pin: part.pin
+          })
         else null
 
       schema = SchemaGenerator.generateMessageSchema(self.bot.names, self.bot.component)

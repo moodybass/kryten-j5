@@ -41,6 +41,8 @@ MESSAGE_SCHEMA =
       'properties':
         'min': 'type': 'number'
         'max': 'type': 'number'
+    'speed':
+      'type': 'number'
 
 formSchema = (conditions) ->
 
@@ -77,6 +79,10 @@ formSchema = (conditions) ->
     {
       'key': 'direction'
       'condition': conditions.servoc_condition
+    }
+    {
+      'key': 'speed'
+      'condition': conditions.esc_condition
     }
   ]
 
@@ -127,6 +133,7 @@ OPTIONS_SCHEMA =
               'LCD-PCF8574A'
               'LCD-JHD1313M1c'
               'MPU6050'
+              'esc'
             ]
             'required': true
           'pin':
@@ -155,7 +162,7 @@ OPTIONS_FORM = [
       'components[].action'
       {
         'key': 'components[].pin'
-        'condition': 'model.components[arrayIndex].action==\'digitalRead\' || model.components[arrayIndex].action==\'digitalWrite\' || model.components[arrayIndex].action==\'analogRead\' || model.components[arrayIndex].action==\'analogWrite\' || model.components[arrayIndex].action==\'servo\''
+        'condition': 'model.components[arrayIndex].action==\'digitalRead\' || model.components[arrayIndex].action==\'digitalWrite\' || model.components[arrayIndex].action==\'analogRead\' || model.components[arrayIndex].action==\'analogWrite\' || model.components[arrayIndex].action==\'servo\' || model.components[arrayIndex].action==\'esc\''
       }
       {
         'key': 'components[].address'

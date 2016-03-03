@@ -23,6 +23,7 @@ class SchemaGenerator
     analog_ = []
     text_ = []
     continuous_ = []
+    esc_ = []
     map = []
 
     names.forEach (name) ->
@@ -40,6 +41,8 @@ class SchemaGenerator
           continuous_.push name
         when 'analogWrite'
           analog_.push name
+        when 'esc'
+          esc_.push name
         else
           text_.push name
 
@@ -48,6 +51,7 @@ class SchemaGenerator
     analog_condition = @createCondition(analog_)
     text_condition = @createCondition(text_)
     servoc_condition = @createCondition(continuous_)
+    esc_condition = @createCondition(esc_)
 
 
     servo_sweep = 'model.servo_action == \'sweep\' && ' + servo_condition
@@ -62,6 +66,7 @@ class SchemaGenerator
       analog_condition: analog_condition
       text_condition: text_condition
       servoc_condition: servoc_condition
+      esc_condition: esc_condition
     }
 
     return schema = {
