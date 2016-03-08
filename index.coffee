@@ -13,28 +13,9 @@ class Kryten
   constructor: (io={}) ->
 
     EventEmitter.call @
+    @defaultSchema = require './schema.json'
 
-    @testOptions =
-    'port': 'auto-detect'
-    'interval': '500'
-    'components': [
-      {
-        'name': 'Led_Pin_13'
-        'action': 'digitalWrite'
-        'pin': '13'
-      }
-      {
-        'name': 'some_sensor'
-        'action': 'analogRead'
-        'pin': '3'
-      }
-      {
-        'name': 'Servo1'
-        'action': 'servo'
-        'pin': '6'
-      }
-    ]
-
+    @testOptions = @defaultSchema.testOptions
     @schema = {}
 
     @options = {}
@@ -140,7 +121,7 @@ class Kryten
           self.bot.lcd[payload.name].cursor(0,0).print(payload.text.substring(0,16))
           self.bot.lcd[payload.name].cursor(1,0).print(payload.text.substring(16,33))
       when "esc"
-        self.bot.esc[payload.name].speed(part.speed)
+        self.bot.esc[payload.name].speed(payload.speed)
 
   checkConfig: (data) =>
     if @boardReady
