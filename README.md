@@ -2,8 +2,13 @@
 
 A wrapper for johnny-five that lets you define/re-configure a board using JSON and then generates schemaform.io schema for controlling it.
 
+This makes Kryten ideal for IoT. Just pick the messaging/m2m platform of your liking and use JSON to configure and control your board remotely without having to write out an interface.
+
+Kryten is used for various hardware connectors for [Octoblu](https://octoblu.com)
+
 You can change what io it uses easily - see uncommented lines in example below.
 
+CoffeeScript Example
 ```coffee
 Kryten = require './index.coffee'
 kryten = new Kryten({})
@@ -61,8 +66,148 @@ kryten.on 'ready', ->
 
 ```
 
+### Configure
+
+Essentially you create an array of components to send to the board defining a name, action, and pin or address.
+
+#### Available Components
+```
+'digitalWrite'
+'digitalRead'
+'analogWrite'
+'analogRead'
+'servo'
+'PCA9685-Servo'
+'oled-i2c'
+'LCD-PCF8574A'
+'LCD-JHD1313M1c'
+'MPU6050'
+'esc'
+```
+
+#### Set components
+```coffee
+testOptions =
+'port': 'auto-detect' #Can be used to specify port
+'interval': '500' # Interval at which to send sensor readings
+'components': [
+  {
+    'name': 'Led_Pin_13'
+    'action': 'digitalWrite'
+    'pin': '13'
+  },
+  {
+    'name': 'Text Display'
+    'action': 'oled-i2c'
+    'address': '0x3C'
+  }
+]
+```
+
+#### Configure Board
+```coffee
+kryten.configure(testOptions)
+```
+
+### Send Command/payload
+For components that take input like digitalWrite, analogWrite, et cetera.
+
+```coffee
+kryten.onMessage({
+  payload:
+    {
+      component: 'Led_Pin_13',
+      state: '1'
+    }
+  })
+```
+
+### Message Structure
+
+#### digitalWrite
+```json
+{ "payload":
+  { "component": "Led_Pin_13",
+    "state": "1" | "0"
+    }
+  }
+```
+
+#### analogWrite
+```json
+{ "payload":
+  { "component": "Some Analog Thing",
+    "value": 0 - 255
+    }
+  }
+```
+
+#### Servo
+
+to
+```json
+{ "payload":
+  { "component": "Servo 1",
+    "servo_action": "to",
+    "to_value": 0 - 180
+    }
+  }
+```
+
+sweep
+```json
+{ "payload":
+  { "component": "Led_Pin_13",
+    "servo_action": "sweep",
+    "sweep": {
+      "min": 0 - 180,
+      "max": 0 - 180
+    }
+   }
+  }
+```
+
+stop
+```json
+{ "payload":
+  { "component": "Servo 1",
+    "servo_action": "stop"
+    }
+  }
+```
+
+#### Servo Continuous
+```json
+{ "payload":
+  { "component": "Servo Name",
+    "direction": "CW, CCW, STOP"
+    }
+  }
+```
+
+
+#### OLED/LCD
+```json
+{ "payload":
+  { "component": "Some display",
+    "text": "Some text to display"
+    }
+  }
+```
+
+#### ESC
+```json
+{ "payload":
+  { "component": "The Esc",
+    "speed": 0 - 255
+    }
+  }
+```
+
 
 
 
 ![Kryten](http://s30.postimg.org/7o69ldgs1/tumblr_m61bkqd_ZF61rvt47eo1_500.jpg)
+
+
 Kryten says don't be a smeg head! Always give credit where credit is due! Open source is awesome, this library is awesome because of awesome people who worked on johnny-five, I just wrapped that awesomeness in bacon.
