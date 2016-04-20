@@ -82,13 +82,13 @@ class Kryten
         debug("pinsssc", self.bot.component[payload.name].pin)
         self.board.analogWrite(parseInt(self.bot.component[payload.name].pin), value)
       when "servo"
-        debug('servo', servo)
+        debug('servo', payload.name)
         if payload.servo_action == "to"
           value = payload.to_value
           self.bot.servo[payload.name].stop()
           self.bot.servo[payload.name].to(value)
         else if payload.servo_action == "sweep"
-          self.bot.servo.sweep([payload.sweep.min, payload.sweep.max])
+          self.bot.servo[payload.name].sweep([payload.sweep.min, payload.sweep.max])
         else if payload.servo_action == "stop"
           self.bot.servo[payload.name].stop()
       when "PCA9685-Servo"
