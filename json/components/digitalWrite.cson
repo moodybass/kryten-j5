@@ -1,0 +1,15 @@
+type: 'digitalWrite'
+schema:
+  options:
+      pin:
+        title: 'Pin'
+        type: 'string'
+  message:
+    type: 'object'
+    properties:
+      name:
+        title: 'Name'
+        type: 'string'
+      pin:
+        title: 'Pin'
+        type: 'string'

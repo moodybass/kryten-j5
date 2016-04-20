@@ -1,0 +1,6 @@
+type: 'digitalRead'
+schema:
+  options:
+      pin:
+        title: 'Pin'
+        type: 'string'
