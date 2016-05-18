@@ -31,8 +31,6 @@ testOptions =
 console.log kryten
 kryten.configure(testOptions)
 
-
-
 # You can do it this way too bc its funny if you get it
 #kryten.spareHead(testOptions)
 

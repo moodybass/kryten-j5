@@ -131,7 +131,7 @@ OPTIONS_SCHEMA =
               'PCA9685-Servo'
               'oled-i2c'
               'LCD-PCF8574A'
-              'LCD-JHD1313M1c'
+              'LCD-JHD1313M1'
               'MPU6050'
               'esc'
             ]
