@@ -50,7 +50,7 @@ class Kryten
     if !@boardReady
       if device.port != 'auto-detect'
         if !@io.io?
-          @board = new five.Board({port: device.port})
+          @board = new five.Board({port: device.port, repl: false})
         else
           @board = new five.Board(@io)
       else

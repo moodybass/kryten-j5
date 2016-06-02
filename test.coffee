@@ -1,5 +1,5 @@
 Kryten = require './index.coffee'
-kryten = new Kryten({})
+kryten = new Kryten({repl: false})
 
 #BLESerialPort = require('ble-serial').SerialPort;
 #Firmata = require('firmata').Board;
