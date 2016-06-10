@@ -270,7 +270,7 @@ class Kryten
   Read: =>
     debug("interval is:", @options.interval)
     setInterval =>
-      return unless @bot.read?
+      return unless @bot.read? && !_.isEmpty @bot.read
       debug @bot.read
       @emit 'data', @bot.read
     , @options.interval
