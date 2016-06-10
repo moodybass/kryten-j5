@@ -4,6 +4,7 @@
     "type": "object",
     "properties": {
       "component": {
+        "title": "Component Name",
         "type": "string"
       },
       "state": {
@@ -20,6 +21,7 @@
     "type": "object",
     "properties": {
       "component": {
+        "title": "Component Name",
         "type": "string"
       },
       "value": {
@@ -32,9 +34,11 @@
     "type": "object",
     "properties": {
       "component": {
+        "title": "Component Name",
         "type": "string"
       },
       "servo_action": {
+        "title": "Function",
         "type": "string",
         "enum": [
           "to",
@@ -43,6 +47,7 @@
         ]
       },
       "sweep": {
+        "title": "Sweep",
         "type": "object",
         "properties": {
           "min": {
@@ -57,6 +62,8 @@
         }
       },
       "to_value": {
+        "title": "To",
+        "description": "An angle value 0 - 180",
         "type": "number",
         "x-schema-form":{
           "condition": "model.servo_action == 'to'"
@@ -69,9 +76,11 @@
     "type": "object",
     "properties": {
       "component": {
+        "title": "Component Name",
         "type": "string"
       },
       "direction": {
+        "title": "Direction",
         "type": "string",
         "enum": [
           "CW",
@@ -86,6 +95,7 @@
     "type": "object",
     "properties": {
       "component": {
+        "title": "Component Name",
         "type": "string"
       },
       "text": {
@@ -98,6 +108,7 @@
     "type": "object",
     "properties": {
       "component": {
+        "title": "Component Name",
         "type": "string"
       },
       "text": {
@@ -110,6 +121,7 @@
     "type": "object",
     "properties": {
       "component": {
+        "title": "Component Name",
         "type": "string"
       },
       "text": {
@@ -122,6 +134,7 @@
     "type": "object",
     "properties": {
       "component": {
+        "title": "Component Name",
         "type": "string"
       },
       "speed": {
