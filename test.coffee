@@ -8,7 +8,8 @@ kryten = new Kryten({repl: false})
 #})
 
 testOptions =
-'port': 'auto-detect'
+'autoDetect': true
+'port': ''
 'interval': '500'
 'components': [
   {
@@ -40,7 +41,10 @@ kryten.on 'ready', ->
   kryten.on 'data', (data)->
     console.log data
 
-  kryten.on 'schema', (schema)->
+  # kryten.on 'angular-schema-form', (schema)->
+  #   console.log schema
+
+  kryten.on 'config', (schema)->
     console.log schema
 
   state = '1'

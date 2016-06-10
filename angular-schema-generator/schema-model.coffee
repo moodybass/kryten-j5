@@ -91,11 +91,15 @@ OPTIONS_SCHEMA =
   'title': 'Component'
   'required': [ 'components' ]
   'properties':
+    'autoDetect':
+      'title': 'Auto Detect Port?'
+      'type': 'boolean'
+      'default': true
     'port':
       'type': 'string'
-      'description': 'Leave this blank to auto-detect a FIRMATA Arduino board on serial.'
+      'description': 'The serial port your board is on'
       'required': false
-      'default': 'auto-detect'
+      'default': '/dev/ttyACM0'
     'interval':
       'type': 'string'
       'enum': [
@@ -128,6 +132,7 @@ OPTIONS_SCHEMA =
               'analogWrite'
               'analogRead'
               'servo'
+              'servo-continuous'
               'PCA9685-Servo'
               'oled-i2c'
               'LCD-PCF8574A'

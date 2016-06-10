@@ -1,0 +1,29 @@
+[
+  "autoDetect"
+  "port",
+  "interval",
+  {
+    "key": "components",
+    "add": "New",
+    "style": {
+      "add": "btn-success"
+    },
+    "items": [
+      "components[].name",
+      "components[].action",
+      {
+        "key": "components[].pin",
+        "condition": "model.components[arrayIndex].action=='digitalRead' || model.components[arrayIndex].action=='digitalWrite' || model.components[arrayIndex].action=='analogRead' || model.components[arrayIndex].action=='analogWrite' || model.components[arrayIndex].action=='servo' || model.components[arrayIndex].action=='esc'"
+      },
+      {
+        "key": "components[].address",
+        "condition": "model.components[arrayIndex].action=='oled-i2c' || model.components[arrayIndex].action=='LCD-PCF8574A' || model.components[arrayIndex].action=='LCD-JHD1313M1' || model.components[arrayIndex].action=='PCA9685-Servo'"
+      }
+    ]
+  },
+  {
+    "type": "submit",
+    "style": "btn-info",
+    "title": "OK"
+  }
+]

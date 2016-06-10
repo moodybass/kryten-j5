@@ -1,0 +1,132 @@
+{
+  "digitalWrite": {
+    "title": "Digital Write",
+    "type": "object",
+    "properties": {
+      "component": {
+        "type": "string"
+      },
+      "state": {
+        "type": "string",
+        "enum": [
+          "1",
+          "0"
+        ]
+      }
+    }
+  },
+  "analogWrite": {
+    "title": "Analog Write",
+    "type": "object",
+    "properties": {
+      "component": {
+        "type": "string"
+      },
+      "value": {
+        "type": "number"
+      }
+    }
+  },
+  "servo": {
+    "title": "Servo",
+    "type": "object",
+    "properties": {
+      "component": {
+        "type": "string"
+      },
+      "servo_action": {
+        "type": "string",
+        "enum": [
+          "to",
+          "sweep",
+          "stop"
+        ]
+      },
+      "sweep": {
+        "type": "object",
+        "properties": {
+          "min": {
+            "type": "number"
+          },
+          "max": {
+            "type": "number"
+          }
+        },
+        "x-schema-form":{
+          "condition": "model.servo_action == 'sweep'"
+        }
+      },
+      "to_value": {
+        "type": "number",
+        "x-schema-form":{
+          "condition": "model.servo_action == 'to'"
+        }
+      }
+    }
+  },
+  "servo-continuous": {
+    "title": "Continuous Servo",
+    "type": "object",
+    "properties": {
+      "component": {
+        "type": "string"
+      },
+      "direction": {
+        "type": "string",
+        "enum": [
+          "CW",
+          "CCW",
+          "STOP"
+        ]
+      }
+    }
+  },
+  "LCD-PCF8574A": {
+    "title": "LCD-PCF8574A",
+    "type": "object",
+    "properties": {
+      "component": {
+        "type": "string"
+      },
+      "text": {
+        "type": "string"
+      }
+    }
+  },
+  "LCD-JHD1313M1": {
+    "title": "LCD-JHD1313M1",
+    "type": "object",
+    "properties": {
+      "component": {
+        "type": "string"
+      },
+      "text": {
+        "type": "string"
+      }
+    }
+  },
+  "oled-i2c": {
+    "title": "OLED",
+    "type": "object",
+    "properties": {
+      "component": {
+        "type": "string"
+      },
+      "text": {
+        "type": "string"
+      }
+    }
+  },
+  "esc": {
+    "title": "ESC",
+    "type": "object",
+    "properties": {
+      "component": {
+        "type": "string"
+      },
+      "speed": {
+        "type": "number"
+      }
+    }
+  }
+}

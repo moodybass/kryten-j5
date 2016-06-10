@@ -5,7 +5,8 @@ Kryten = require('./index.js');
 var kryten = new Kryten({});
 
 testOptions = {
-  'port': 'auto-detect',
+  'autoDetect': true,
+  'port': '',
   'interval': '500',
   'components': [
     {
@@ -32,9 +33,11 @@ kryten.on('ready', function() {
   kryten.on('data', function(data) {
     return console.log(data);
   });
-  kryten.on('schema', function(schema) {
+  
+  kryten.on('angular-schema-form', function(schema) {
     return console.log(schema);
   });
+
   state = '1';
   return setInterval(function() {
     kryten.onMessage({

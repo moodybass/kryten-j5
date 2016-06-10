@@ -20,7 +20,8 @@ kryten = new Kryten({})
 #})
 
 testOptions =
-'port': 'auto-detect'
+'autoDetect': true
+'port': ''
 'interval': '500'
 'components': [
   {
