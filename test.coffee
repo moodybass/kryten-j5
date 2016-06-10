@@ -45,7 +45,7 @@ kryten.on 'ready', ->
   #   console.log schema
 
   kryten.on 'config', (schema)->
-    console.log schema
+    console.log 'New Schema', schema
 
   state = '1'
 

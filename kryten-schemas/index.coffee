@@ -12,8 +12,10 @@ class KrytenSchema
 
   generateMessageSchema: (names, component) =>
     components = @componentList names, component
-    schema = schemaModel
+    schema = {}
     _.forEach components, (value, key) =>
+      return unless value?
+      schema[key] = schemaModel[key] if !schema[key]?
       schema[key].properties.component.enum = value
     return schema
 
