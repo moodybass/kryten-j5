@@ -52,13 +52,13 @@ kryten.on 'ready', ->
   kryten.on 'data', (data)->
     console.log data
 
-  kryten.on 'schema', (schema)->
+  kryten.on 'angular-schema-form', (schema)->
     console.log schema
 
   state = '1'
 
   setInterval ->
-    kryten.onMessage({payload: {component: 'Led_Pin_13', state: state}})
+    kryten.onMessage({component: 'Led_Pin_13', state: state})
     if state == '1'
       state = '0'
     else
@@ -108,6 +108,48 @@ testOptions =
 #### Configure Board
 ```coffee
 kryten.configure(testOptions)
+```
+
+#### Generated Schema
+
+##### schemaform.io Message Schema and Formschema
+
+```coffee
+kryten.on 'angular-schema-form', (schema)->
+  console.log schema
+```
+
+##### Schema collection
+
+```coffee
+kryten.on 'config', (schema)->
+  console.log schema
+```
+
+Returns collection of schemas for components that were created.
+So if you configured just one digitalWrite component you would get back this.
+
+```json
+{
+  "digitalWrite": {
+    "title": "Digital Write",
+    "type": "object",
+    "properties": {
+      "component": {
+        "title": "Component Name",
+        "type": "string",
+        "enum": ["Some Component you named"]
+      },
+      "state": {
+        "type": "string",
+        "enum": [
+          "1",
+          "0"
+        ]
+      }
+    }
+  },
+}
 ```
 
 ### Send Command/payload

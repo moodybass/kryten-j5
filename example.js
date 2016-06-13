@@ -33,18 +33,16 @@ kryten.on('ready', function() {
   kryten.on('data', function(data) {
     return console.log(data);
   });
-  
-  kryten.on('angular-schema-form', function(schema) {
+
+  kryten.on('config', function(schema) {
     return console.log(schema);
   });
 
   state = '1';
   return setInterval(function() {
     kryten.onMessage({
-      payload: {
         component: 'Led_Pin_13',
         state: state
-      }
     });
     if (state === '1') {
       return state = '0';

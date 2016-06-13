@@ -48,7 +48,8 @@ class Kryten
         @configBoard(device)
 
   onMessage: (message) =>
-    payload = message.payload
+    payload = message if !message.payload?
+    payload = message.payload if message.payload?
     payload.name = payload.component
 
     if !@bot.component[payload.name]

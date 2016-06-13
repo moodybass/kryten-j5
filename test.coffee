@@ -50,7 +50,7 @@ kryten.on 'ready', ->
   state = '1'
 
   setInterval ->
-    kryten.onMessage({payload: {component: 'Led_Pin_13', state: state}})
+    kryten.onMessage({component: 'Led_Pin_13', state: state})
     if state == '1'
       state = '0'
     else
